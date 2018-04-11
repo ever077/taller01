@@ -24,7 +24,7 @@ import frsf.isi.died.tp.util.Ordenable;
  * 
  * @author mdominguez
  */
-public abstract class MaterialCapacitacion {
+public abstract class MaterialCapacitacion implements Ordenable{
 	protected Integer id;
 	/**
 	 * Titulo del material
@@ -129,5 +129,10 @@ public abstract class MaterialCapacitacion {
 	}
 	
 	// TODO 10: implementar Ordenable
+	
+	public int valor() {
+		double aux = precio();
+		return (int)aux; 
+	}
 
 }
