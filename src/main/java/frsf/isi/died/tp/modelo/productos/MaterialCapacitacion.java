@@ -130,9 +130,11 @@ public abstract class MaterialCapacitacion implements Ordenable{
 	
 	// TODO 10: implementar Ordenable
 	
-	public int valor() {
+	public final int valor() {
 		double aux = precio();
 		return (int)aux; 
 	}
+	// RESPUESTA: como Libro y Video son una especializacion de materialCapacitacion, simpre se crean instancias de
+	//Libro y Video, entonces el metodo precio() es siempre ejecutado por una de estas 2 instancias
 
 }
