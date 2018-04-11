@@ -1,3 +1,13 @@
+/** @author 
+  	Guido D'Antoni  
+  	Ever Godoy
+  	Axel Bellmann
+  	
+  	URL proyecto clonado: https://github.com/ever077/taller01.git
+  
+*/
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -63,6 +73,30 @@ public abstract class MaterialCapacitacion {
 	// elegir el menu "Source" --> "Generate getters y setters" y elegir alli que metodos generar.
 	
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
+	}
+
 	/**
 	 * El precio de un material se define según el tipo del material y toma como
 	 * base el costo del mismo
@@ -88,6 +122,11 @@ public abstract class MaterialCapacitacion {
 	//  retornando el titulo, y el precio 	 * usando el formato : 
 	// [Titulo: <titulo> ; Precio: <precio> ]
 	
+	public String toString() {
+		
+		return "titulo : " + this.titulo + " Precio : " + this.precio();
+				
+	}
 	
 	// TODO 10: implementar Ordenable
 
