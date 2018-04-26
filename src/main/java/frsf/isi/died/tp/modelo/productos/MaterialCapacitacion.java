@@ -136,5 +136,11 @@ public abstract class MaterialCapacitacion implements Ordenable{
 	}
 	// RESPUESTA: como Libro y Video son una especializacion de materialCapacitacion, simpre se crean instancias de
 	//Libro y Video, entonces el metodo precio() es siempre ejecutado por una de estas 2 instancias
-
+	
+	public boolean equals(Object m) {
+		if(m instanceof MaterialCapacitacion && this.titulo.equalsIgnoreCase(((MaterialCapacitacion) m).getTitulo())) {
+			return true;
+		}
+		return false;
+	}
 }

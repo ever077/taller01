@@ -115,6 +115,12 @@ public class Libro extends MaterialCapacitacion {
 		return this.getCosto() + (this.precioCompra * factor_paginas);
 	}
 
+	public boolean equals(Object m) {
+		if(m instanceof Libro && super.equals(m)) {
+			return true;
+		}
+		return false;
+	}
 	
 
 }

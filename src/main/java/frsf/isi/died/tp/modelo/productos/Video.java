@@ -45,7 +45,12 @@ public class Video extends MaterialCapacitacion {
 	}
 	
 	
-
+	public boolean equals(Object m) {
+		if(m instanceof Video && super.equals(m)) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 }
