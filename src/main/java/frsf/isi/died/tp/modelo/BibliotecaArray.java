@@ -33,7 +33,7 @@ public class BibliotecaArray implements Biblioteca{
 	
 	public BibliotecaArray() {
 		cantidadMaterial=0;
-		this.materialCapacitacion= new MaterialCapacitacion[10];
+		this.materialCapacitacion= new MaterialCapacitacion[5];
 		// TODO 13: inicializar la variable de tipo ListaService para que apunte el servicio de operaciones de listas
 		variable = new ListaServiceRadix(materialCapacitacion); 
 	}
