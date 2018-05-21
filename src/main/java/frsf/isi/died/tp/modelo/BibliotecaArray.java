@@ -54,24 +54,18 @@ public class BibliotecaArray implements Biblioteca{
 		return cantidadMaterial;
 	}
 
-
-
 	@Override
 	public Integer cantidadLibros() {
 		// TODO 08: retorna la cantidad de libros registrados en el sistema.
 		// No se puede usar para este método el operador "instanceOf" ni realizar ningun tipo de casting.
 		int cont=0;
 		for(int i=0; i<cantidadMaterial; i++){
-			
 			if(materialCapacitacion[i].esLibro()) {
 				cont++;
-				
 			}
 		}
 		return cont;
 	}
-
-
 
 	@Override
 	public Integer cantidadVideos() {
@@ -79,15 +73,11 @@ public class BibliotecaArray implements Biblioteca{
 		// No se puede usar para este método el operador "instanceOf" ni realizar ningun tipo de casting. 
 		int cont=0;
 		for(int i=0; i<cantidadMaterial; i++){
-			
 			if(materialCapacitacion[i].esVideo()) {
 				cont++;
-				
 			}
 		}
-		
 		return cont;
-		
 	}
 
 	@Override
@@ -95,14 +85,12 @@ public class BibliotecaArray implements Biblioteca{
 		//TODO 14: invocar al método imprimir de la variable de tipo ListaService para que imprima el arreglo
 		variable.imprimir();
 	}
-		
 
 	@Override
 	public void ordenarPorPrecio(Boolean b) {
 		// TODO 15: invocar al metodo ordenar de la variable de tipo ListaService para que ordene el arreglo
 		variable.ordenar();
 	}
-
 
 	@Override
 	public Collection<MaterialCapacitacion> materiales() {
@@ -114,7 +102,6 @@ public class BibliotecaArray implements Biblioteca{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 
 }

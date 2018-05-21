@@ -11,11 +11,9 @@ public class Video extends MaterialCapacitacion {
 		super();
 	}
 
-
 	public Video(Integer id, String titulo) {
 		super(id, titulo);
 	}
-	
 	
 	public Video(Integer id, String titulo, Double costo) {
 		super(id, titulo, costo);
@@ -36,14 +34,9 @@ public class Video extends MaterialCapacitacion {
 		return true;
 	}
 	
-
-	
 	public Double precio() {
-		
 		return (super.costo + (costo * duracion));
-		
 	}
-	
 	
 	public boolean equals(Object m) {
 		if(m instanceof Video && super.equals(m)) {

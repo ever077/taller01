@@ -37,7 +37,6 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	 */
 	protected Double costo;
 	
-
 	/**
 	 * Constructor por defecto
 	 */
@@ -72,7 +71,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	// AYUDA: para implementar estos metodos usar un atajo del IDE 
 	// elegir el menu "Source" --> "Generate getters y setters" y elegir alli que metodos generar.
 	
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -123,9 +122,7 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	// [Titulo: <titulo> ; Precio: <precio> ]
 	
 	public String toString() {
-		
-		return "titulo : " + this.titulo + " Precio : " + this.precio();
-				
+		return "titulo : " + this.titulo + " Precio : " + this.precio();	
 	}
 	
 	// TODO 10: implementar Ordenable
@@ -150,7 +147,6 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		int aux = this.titulo.compareTo(arg0.getTitulo());
 		if(aux == 0){
 			return this.precio().compareTo(arg0.precio());
-			
 		}else{
 			return aux;
 		}
