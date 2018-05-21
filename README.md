@@ -2,8 +2,8 @@
 Taller 01 Java
 
 ##Integrantes del grupo##
-1. <Guido D'Antoni>
-2. <Ever Godoy>
+1. Guido D'Antoni
+2. Ever Godoy
 3. 
 
 ###Tareas a realizar:###
