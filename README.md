@@ -4,7 +4,7 @@ Taller 01 Java
 ##Integrantes del grupo##
 1. <Guido D'Antoni>
 2. <Ever Godoy>
-3. <Axel Bellmann>
+3. 
 
 ###Tareas a realizar:###
 *	Clonar el repositorio github
@@ -15,3 +15,5 @@ Taller 01 Java
 *	Implementar la interface Ordenable
 *	Implementar los algoritmos de ordenamiento
 *	Enviar el trabajo
+
+Taller 01 y taller 02 --> Resueltos
