@@ -86,6 +86,7 @@ public class ArbolBinarioBusqueda extends Arbol {
 	@Override
 	public Integer tamanio(){
 		//TODO completar
+		//*************************************************************************
 		if(this.izquierdo().esVacio() && this.derecho().esVacio()) {
 			return 1;
 		}
