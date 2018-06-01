@@ -17,3 +17,5 @@ Taller 01 Java
 *	Enviar el trabajo
 
 Taller 01 y taller 02 --> Resueltos
+
+Taller 03 Resuelto --> Falta el test del ejercicio 5
