@@ -188,8 +188,8 @@ public class Grafo<T> {
     	//TODO
     	Queue porVisitar = new LinkedList<Vertice<T>>();
     	Vertice<T> vertice = this.getNodo(v);
-    	visitados.add(vertice);
-    	return primerVerticeGradoK(v, gradoK, visitados, porVisitar);
+    	porVisitar.add(vertice);
+    	return primerVerticeGradoK(gradoK, visitados, porVisitar);
     /*	Vertice<T> vertice = this.getNodo(v);
     	visitados.add(vertice);
     	for(Arista a : aristas) {
@@ -202,7 +202,31 @@ public class Grafo<T> {
 		
     }
 
-    private T primerVerticeGradoK(T v,Integer gradoK, HashSet<Vertice> visitados, Queue porVisitar) {
+    private T primerVerticeGradoK(Integer gradoK, HashSet<Vertice> visitados, Queue porVisitar) {
+    	
+    	if(porVisitar.isEmpty()) {
+    		return null;
+    	}
+    	
+    	Vertice<T> vertice = (Vertice<T>) porVisitar.poll(); 
+    	visitados.add(vertice);
+    	
+    	if(this.getAdyacentes(vertice).size() == gradoK) {
+    		return vertice.getValor();
+    	}else {
+    		
+    		for(Vertice<T> v: this.getAdyacentes(vertice)) {
+        		
+        		if(!visitados.contains(v)) {
+        			porVisitar.add(v);
+        		}
+        	}
+    		
+    		return primerVerticeGradoK(gradoK, visitados, porVisitar);
+    	}
+    	
+    	
+/*    	
     	Vertice<T> vertice = this.getNodo(v);
     	//visitados.add(vertice);
     	for(Arista a : this.aristas) {
@@ -224,6 +248,7 @@ public class Grafo<T> {
     public boolean existeCamino(T v) {
 		Vertice<T> vertice = this.getNodo(v);
     	return true;
+    	*/
     }
     
     
