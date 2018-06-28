@@ -263,11 +263,55 @@ public class Grafo<T> {
         return this.buscarCaminoNSaltos(origen, destino, saltos, new HashSet<Vertice>());
          
     }
+    
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
         ArrayList<T> resultado = new ArrayList<>();
        //TODO
+        
+        List<Vertice<T>> porvisitar = new ArrayList<>();
+        
+       
+       if(saltos <= 0)
+       {
+    	   return resultado;
+    	   
+       }else {
+        	
+  
+        if(!visitados.contains(n1)) { 
+      	  visitados.add(n1); 
+      	  porvisitar = this.getAdyacentes(n1); 
+      	  
+      	  	if(saltos == 1 && porvisitar.contains(n2)) {
+      	  		resultado.add(n1.getValor());
+      	  		resultado.add(n2.getValor());
+      	  		return resultado;
+      	  	}
+      	  	else {
+      	  		
+      	  			for(Vertice<T> vertice : porvisitar) {
+          		  
+	      	  			if(!visitados.contains(vertice)) {
+	      	  				resultado.addAll(this.buscarCaminoNSaltos(vertice, n2, saltos-1, visitados));
+	      	  				
+	      	  				if(!resultado.isEmpty()) {
+	      	  					visitados.add(vertice);
+	      	  					resultado.add(0, n1.getValor());
+	      	  				}
+	      	  				else {
+	      	  					visitados.clear();
+	      	  				}
+	      	  			}
+      	  			
+	      	  				if(!resultado.isEmpty()) {
+	      	  						return resultado;
+	      	  					}
+      	  			}
+      	  	}  
+        }
         return resultado;
     }
-
-
+ }
 }
+
+
