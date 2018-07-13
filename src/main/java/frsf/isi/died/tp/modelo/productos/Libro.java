@@ -5,7 +5,9 @@
  */
 package frsf.isi.died.tp.modelo.productos;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -53,6 +55,12 @@ public class Libro extends MaterialCapacitacion {
 		this.paginas = paginas;
 	}
 
+	public Libro(Integer id, String titulo, Double costo, Double precioCompra, Integer paginas, Integer calificacion, Date fechaPublicacion, Relevancia relevancia) {
+		super(id, titulo, costo, calificacion, fechaPublicacion, relevancia);
+		this.precioCompra = precioCompra;
+		this.paginas = paginas;
+	}
+	
 	/**
 	 * retorna el precio al que el libro fue comprado
 	 * @return precio al que el libro fue comprado
@@ -122,5 +130,23 @@ public class Libro extends MaterialCapacitacion {
 		return false;
 	}
 	
-
+	@Override
+	public void loadFromStringRow(List<String> datos) {
+		this.id =Integer.valueOf(datos.get(0));
+		this.titulo = datos.get(1);
+		this.costo =Double.valueOf(datos.get(2));
+		this.paginas =Integer.valueOf(datos.get(3));
+		this.precioCompra =Double.valueOf(datos.get(4));
+	}
+	
+	@Override
+	public List<String> asCsvRow() {
+		List<String> lista = new ArrayList<String>();
+		lista.add(this.id+"");
+		lista.add("\""+this.titulo.toString()+"\"");
+		lista.add(this.costo.toString());
+		lista.add(this.paginas.toString());
+		lista.add(this.precioCompra.toString());
+		return lista;
+	}
 }

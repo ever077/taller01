@@ -16,15 +16,16 @@
 package frsf.isi.died.tp.modelo.productos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import frsf.isi.died.tp.util.Ordenable;
-
+import frsf.isi.died.app.dao.util.CsvRecord;
 /**
  * Representa de manera abstracta los materiales de capacitación
  * 
  * @author mdominguez
  */
-public abstract class MaterialCapacitacion implements Ordenable, Comparable<MaterialCapacitacion>{
+public abstract class MaterialCapacitacion implements Ordenable, Comparable<MaterialCapacitacion>, CsvRecord{
 	protected Integer id;
 	/**
 	 * Titulo del material
@@ -40,10 +41,15 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 	/**
 	 * Constructor por defecto
 	 */
+	protected Integer calificacion =0;
+	protected Date fechaPublicacion = new Date();
+	protected Relevancia relevancia = null;
+	
 	public MaterialCapacitacion() {
 		this(0,"en desarrollo",0.0);
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,6 +95,20 @@ public abstract class MaterialCapacitacion implements Ordenable, Comparable<Mate
 		this.id =id;
 		this.titulo = titulo;
 		this.costo = costo;
+	}
+
+
+
+
+	public MaterialCapacitacion(Integer id, String titulo, Double costo, Integer calificacion, Date fechaPublicacion,
+			Relevancia relevancia) {
+		
+		this.id = id;
+		this.titulo = titulo;
+		this.costo = costo;
+		this.calificacion = calificacion;
+		this.fechaPublicacion = fechaPublicacion;
+		this.relevancia = relevancia;
 	}
 
 
