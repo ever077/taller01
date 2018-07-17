@@ -9,7 +9,11 @@ import frsf.isi.died.app.controller.TiposAcciones;
 import frsf.isi.died.app.controller.MenuController;
 
 public class Principal {
-	private static JMenuItem menuItem_1;
+	private static JMenuItem menuItem_NuevoVideo;
+	private static JMenuItem menuItem_NuevoLibro;
+	private static JMenuItem menuItem_Salir;
+	private static JMenuItem menuItem_BuscarCamino;
+	private static JMenuItem menuItem_ModificarLibro;
 	public static void main(String[] args) {
 	    javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
@@ -34,28 +38,33 @@ public class Principal {
 	        JMenu MenuLibro = new JMenu("Libro");
 	        menu.add(MenuLibro);
 	        
-	        menuItem = new JMenuItem("Nuevo Libro");
-	        MenuLibro.add(menuItem);
-	        menuItem.addActionListener(e -> controller.showView(TiposAcciones.ABM_LIBROS));
+	        menuItem_NuevoLibro = new JMenuItem("Nuevo Libro");
+	        MenuLibro.add(menuItem_NuevoLibro);
+	        
+	        menuItem_ModificarLibro = new JMenuItem("Modificar Libro");
+	        MenuLibro.add(menuItem_ModificarLibro);
+	        
+	        menuItem_NuevoLibro.addActionListener(e -> controller.showView(TiposAcciones.ALTA_LIBROS));
+	        menuItem_ModificarLibro.addActionListener(e -> controller.showView(TiposAcciones.MODIFICACION_LIBROS));
 	        
 	        JMenu MenuVideo = new JMenu("Video");
 	        menu.add(MenuVideo);
 
-	        menuItem_1 = new JMenuItem("Nuevo Video");
-	        MenuVideo.add(menuItem_1);
+	        menuItem_NuevoVideo = new JMenuItem("Nuevo Video");
+	        MenuVideo.add(menuItem_NuevoVideo);
 	        menu.addSeparator();
-	        menuItem = new JMenuItem("Salir");
-	        menuItem.addActionListener(e->System.exit(99));
-	        menu.add(menuItem);
+	        menuItem_Salir = new JMenuItem("Salir");
+	        menuItem_Salir.addActionListener(e->System.exit(99));
+	        menu.add(menuItem_Salir);
 
 	        menuBar.add(menu);
 	        
 	        menu = new JMenu("Opciones");
 	        menuBar.add(menu);
 	        
-	        menuItem = new JMenuItem("Buscar Camino");
-	        menuItem.addActionListener(e -> controller.showView(TiposAcciones.VER_GRAFO));
-	        menu.add(menuItem);
+	        menuItem_BuscarCamino = new JMenuItem("Buscar Camino");
+	        menuItem_BuscarCamino.addActionListener(e -> controller.showView(TiposAcciones.VER_GRAFO));
+	        menu.add(menuItem_BuscarCamino);
 	        menuBar.add(menu);
 	        
 	        f.setJMenuBar(menuBar);

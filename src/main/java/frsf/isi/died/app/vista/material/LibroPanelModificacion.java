@@ -2,12 +2,13 @@ package frsf.isi.died.app.vista.material;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -15,8 +16,7 @@ import javax.swing.JTextField;
 import frsf.isi.died.app.controller.LibroController;
 import frsf.isi.died.tp.modelo.productos.Libro;
 
-public class LibroPanel extends LPanel{
-	
+public class LibroPanelModificacion extends LPanel {
 	private JScrollPane scrollPane;
 	private JTable tabla;
 	private JLabel lblTitulo;
@@ -27,14 +27,14 @@ public class LibroPanel extends LPanel{
 	private JTextField txtCosto;
 	private JTextField txtPrecioCompra;
 	private JTextField txtPaginas;
-	private JButton btnAgregar;
+	private JButton btnModificar;
 	private JButton btnCancelar;
 
 	private LibroTableModel tableModel;
 
 	private LibroController controller;
 	
-	public LibroPanel() {
+	public LibroPanelModificacion() {
 		this.setLayout(new GridBagLayout());
 		tableModel = new LibroTableModel();
 	}
@@ -52,10 +52,12 @@ public class LibroPanel extends LPanel{
 		gridConst.gridwidth=5;
 		this.add(txtTitulo, gridConst);
 		
+		
 
-		btnAgregar = new JButton("Agregar");
-		btnAgregar.addActionListener( e ->{
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener( e ->{
 			try {
+				
 				Double costo = Double.valueOf(txtCosto.getText());
 				Double precio = Double.valueOf(txtPrecioCompra.getText());
 				Integer paginas = Integer.valueOf(txtPaginas.getText());
@@ -72,7 +74,7 @@ public class LibroPanel extends LPanel{
 		gridConst.weightx=1.0;
 		gridConst.anchor = GridBagConstraints.LINE_START;
 		gridConst.gridx=6;
-		this.add(btnAgregar, gridConst);
+		this.add(btnModificar, gridConst);
 		
 		
 		lblCosto= new JLabel("Costo: ");		
@@ -114,7 +116,22 @@ public class LibroPanel extends LPanel{
 		tabla = new JTable(this.tableModel);
 		tabla.setFillsViewportHeight(true);
 		scrollPane= new JScrollPane(tabla);
+
+//------------------------
 		
+		setEventoMouseClicked(tabla);
+		
+	/*	ArrayList lista = new ArrayList();
+		int fila = tabla.getSelectedRow();
+		for(int i = 1; i < 5; i++) {
+			lista.add(tabla.getValueAt(fila, i));
+		}
+		txtTitulo.setText((String)lista.get(0));
+		txtCosto.setText((String)lista.get(1));
+		txtPaginas.setText((String)lista.get(2));
+		txtPrecioCompra.setText((String)lista.get(3));
+		System.out.println((String)lista.get(0) + " " + (String)lista.get(1) + " " + (String)lista.get(2));
+		*/
 		gridConst.gridx=0;
 		gridConst.gridwidth=7;	
 		gridConst.gridy=2;
@@ -137,5 +154,36 @@ public class LibroPanel extends LPanel{
 		this.tableModel.setLibros(librosLista);
 		if(actualizar) this.tableModel.fireTableDataChanged();
 	}
-
+	
+	public ArrayList getFilaSeleccionada() {
+		ArrayList lista = new ArrayList();
+		int fila = tabla.getSelectedRow();
+		for(int i = 1; i < 5; i++) {
+			lista.add(tabla.getValueAt(fila, i));
+		}
+		return lista;
+	}
+	public void cargarCampos(ArrayList lista){
+		txtTitulo.setText((String)lista.get(0));
+		txtCosto.setText(lista.get(1).toString());
+		txtPaginas.setText((String)lista.get(2).toString());
+		txtPrecioCompra.setText((String)lista.get(3).toString());
+		//System.out.println((String)lista.get(0) + " " + (String)lista.get(1) + " " + (String)lista.get(2));
+	}
+	
+	private void setEventoMouseClicked(JTable tbl)
+    {
+        tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+ 
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        	tblEjemploMouseClicked(e);
+        }
+        });
+        
+    }
+	
+	public void tblEjemploMouseClicked(java.awt.event.MouseEvent evt) {
+    	  this.cargarCampos(this.getFilaSeleccionada());
+       }
 }
