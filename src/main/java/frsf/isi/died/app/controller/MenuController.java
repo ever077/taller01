@@ -32,9 +32,9 @@ public class MenuController {
 		case MODIFICACION_LIBROS:
 			
 			 LibroPanelModificacion panelModificacion = new LibroPanelModificacion();
-			 LibroController controller2 = new LibroController(panelModificacion);
-			 controller2.crearPanel();
-			 framePrincipal.setContentPane(controller2.getPanelLibro());
+			 LibroController controllerModificacion = new LibroController(panelModificacion);
+			 controllerModificacion.crearPanel();
+			 framePrincipal.setContentPane(controllerModificacion.getPanelLibro());
 			// ArrayList filaSeleccionada = controller2.getFilaSeleccionada();
 			 //controller2.cargarCampos(filaSeleccionada);
 			 break;

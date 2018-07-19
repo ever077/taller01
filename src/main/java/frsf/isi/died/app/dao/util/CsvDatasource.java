@@ -143,8 +143,8 @@ public class CsvDatasource {
 		return result;
 
 	}
-
-	private void writeLine(Writer w, List<String> values) throws IOException {
+// cambie de private a public
+	public void writeLine(Writer w, List<String> values) throws IOException {
 
 		boolean first = true;
 

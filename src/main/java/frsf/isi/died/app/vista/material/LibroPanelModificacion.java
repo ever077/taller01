@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import frsf.isi.died.app.controller.LibroController;
+import frsf.isi.died.app.excepciones.MaterialNotFoundException;
 import frsf.isi.died.tp.modelo.productos.Libro;
 
 public class LibroPanelModificacion extends LPanel {
@@ -33,6 +34,8 @@ public class LibroPanelModificacion extends LPanel {
 	private LibroTableModel tableModel;
 
 	private LibroController controller;
+	// Id del libro que selecciona el usuario
+	private Integer idLibroSeleccionado = 0;
 	
 	public LibroPanelModificacion() {
 		this.setLayout(new GridBagLayout());
@@ -57,16 +60,22 @@ public class LibroPanelModificacion extends LPanel {
 		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener( e ->{
 			try {
+				if(!txtTitulo.getText().isEmpty()) {
+					Double costo = Double.valueOf(txtCosto.getText());
+					Double precio = Double.valueOf(txtPrecioCompra.getText());
+					Integer paginas = Integer.valueOf(txtPaginas.getText());
+					controller.modificarLibro(idLibroSeleccionado, txtTitulo.getText(), costo, precio, paginas);
+				}
 				
-				Double costo = Double.valueOf(txtCosto.getText());
-				Double precio = Double.valueOf(txtPrecioCompra.getText());
-				Integer paginas = Integer.valueOf(txtPaginas.getText());
-				controller.agregarLibro(txtTitulo.getText(), costo, precio, paginas);
 				txtTitulo.setText("");
 				txtCosto.setText("");
 				txtPrecioCompra.setText("");
 				txtPaginas.setText("");
-			}catch(Exception ex) {
+			}
+			catch(MaterialNotFoundException mex) {
+				JOptionPane.showMessageDialog(this, mex.getMessage(), "Dato no encontrado", JOptionPane.ERROR_MESSAGE);
+			}
+			catch(Exception ex) {
 			    JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -116,22 +125,10 @@ public class LibroPanelModificacion extends LPanel {
 		tabla = new JTable(this.tableModel);
 		tabla.setFillsViewportHeight(true);
 		scrollPane= new JScrollPane(tabla);
-
-//------------------------
 		
+		//  Seteamos el evento a la tabla
 		setEventoMouseClicked(tabla);
 		
-	/*	ArrayList lista = new ArrayList();
-		int fila = tabla.getSelectedRow();
-		for(int i = 1; i < 5; i++) {
-			lista.add(tabla.getValueAt(fila, i));
-		}
-		txtTitulo.setText((String)lista.get(0));
-		txtCosto.setText((String)lista.get(1));
-		txtPaginas.setText((String)lista.get(2));
-		txtPrecioCompra.setText((String)lista.get(3));
-		System.out.println((String)lista.get(0) + " " + (String)lista.get(1) + " " + (String)lista.get(2));
-		*/
 		gridConst.gridx=0;
 		gridConst.gridwidth=7;	
 		gridConst.gridy=2;
@@ -158,17 +155,21 @@ public class LibroPanelModificacion extends LPanel {
 	public ArrayList getFilaSeleccionada() {
 		ArrayList lista = new ArrayList();
 		int fila = tabla.getSelectedRow();
-		for(int i = 1; i < 5; i++) {
-			lista.add(tabla.getValueAt(fila, i));
+		for(int i = 0; i < 5; i++) {
+			if(i == 0) {
+				// Capturo la ID del libro seleccionado
+				idLibroSeleccionado = (Integer) tabla.getValueAt(fila, i);
+			}else {
+				lista.add(tabla.getValueAt(fila, i));
+			}
 		}
 		return lista;
 	}
 	public void cargarCampos(ArrayList lista){
 		txtTitulo.setText((String)lista.get(0));
-		txtCosto.setText(lista.get(1).toString());
-		txtPaginas.setText((String)lista.get(2).toString());
-		txtPrecioCompra.setText((String)lista.get(3).toString());
-		//System.out.println((String)lista.get(0) + " " + (String)lista.get(1) + " " + (String)lista.get(2));
+		txtCosto.setText(lista.get(2).toString());
+		txtPaginas.setText((String)lista.get(3).toString());
+		txtPrecioCompra.setText((String)lista.get(1).toString());
 	}
 	
 	private void setEventoMouseClicked(JTable tbl)

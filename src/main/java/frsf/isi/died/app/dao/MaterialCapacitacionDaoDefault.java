@@ -1,10 +1,18 @@
 package frsf.isi.died.app.dao;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import frsf.isi.died.app.dao.util.CsvDatasource;
+import frsf.isi.died.app.excepciones.MaterialNotFoundException;
 import frsf.isi.died.tp.estructuras.Grafo;
 import frsf.isi.died.tp.modelo.Biblioteca;
 import frsf.isi.died.tp.modelo.BibliotecaABB;
@@ -132,5 +140,58 @@ public class MaterialCapacitacionDaoDefault implements MaterialCapacitacionDao{
 		}
 	}
 
+	@Override
+	public MaterialCapacitacion buscarMaterial(Integer idMaterialCapacitacion) throws MaterialNotFoundException {
+		List<MaterialCapacitacion> lista = this.listaMateriales();
+		for(MaterialCapacitacion l : lista) {
+			if(l.getId() == idMaterialCapacitacion) {
+				return l;
+			}
+		}
+		throw new MaterialNotFoundException();
+	}
+	
+	public void modificarLibro(Libro l) throws IOException {
+		List<List<String>> listaArchivo = dataSource.readFile("libros.csv");
+		FileWriter fichero = null;
+	    PrintWriter escritor = null;
+		try {
+			fichero = new FileWriter("libros.csv");
+			escritor = new PrintWriter(fichero);
+			escritor.flush();
+			for(List<String> fila : listaArchivo) {
+				if(fila.get(0).equals(l.getId().toString())) {
+					// Este es el libro a modificar
+					fila.set(1, l.getTitulo());
+					fila.set(2, l.getCosto().toString());
+					fila.set(3, l.getPaginas().toString());
+					fila.set(4, l.getPrecioCompra().toString());
+				}
+				// agrego fila al nuevo archivo
+				dataSource.writeLine(escritor, fila);
+				
+				// Alternativo -> No guarda con el mismo formato
+			/*	for(int i = 0; i < fila.size() ; i++) {
+					escritor.write(fila.get(i));
+				}
+				escritor.println();
+			*/
+			}
+			escritor.close();
+		}
+		catch(IOException e){
+			JOptionPane.showMessageDialog(null, "Error al escribir en el archivo de texto: "+e.getMessage());
+		}
+		finally {
+	        if(fichero != null){
+	            try {
+	                fichero.close();
+	            } catch (IOException e) {
+	                JOptionPane.showMessageDialog(null, "Error al cerrar archivo de texto: "+e.getMessage());
+	            }
+	        }
+	    }
+	}
+	
 	
 }
